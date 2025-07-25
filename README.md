@@ -47,3 +47,13 @@ mini_pos/
 ├── pubspec.yaml
 ├── analysis_options.yaml
 └── README.md
+
+**Flutter & Dart version**
+- Flutter: `3.24.1`
+- Dart: `3.5.1`
+
+**Run tests**
+
+```bash
+flutter pub get
+flutter test --coverage
