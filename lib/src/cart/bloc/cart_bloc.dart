@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 
 import '../models/cart_line.dart';
+import '../models/receipt.dart';
 import '../models/totals.dart';
 import 'cart_event.dart';
 import 'cart_state.dart';
@@ -16,6 +17,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<ClearCartEvent>(_onClearCart);
     on<UndoCartEvent>(_onUndoCart);
     on<RedoCartEvent>(_onRedoCart);
+    on<GenerateReceipt>(_onGenerateReceipt);
   }
 
 
@@ -90,6 +92,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       final next = _redoStack.removeLast();
       emit(next);
     }
+  }
+
+  void _onGenerateReceipt(GenerateReceipt event , Emitter<CartState> emit) {
+    final Receipt receipt = buildReceipt(state,DateTime.now());
+    emit(CartCheckedOutState(lines: state.lines,totals: state.totals,receipt));
   }
   
 }

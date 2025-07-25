@@ -94,4 +94,19 @@ void main() {
       isA<CartState>().having((state)=>state.totals.grandTotal.asMoney, 'grandTotal After adding converting it to money format', "2.93")
     ]
   );
+
+  blocTest<CartBloc,CartState>(
+    '7- Generate Receipt for 2 items after buying it',
+    build: ()=>CartBloc(),
+    act: (bloc) =>
+    bloc..add(const AddItemEvent(item: Item(id: 'p01', name: 'Coffee', price: 2.50)))..
+    add(const AddItemEvent(item: Item(id: 'p02', name: 'Bagel', price: 3.20)))..
+    add(const GenerateReceipt()),
+    expect: ()=>[
+      isA<CartState>().having((state)=> state.totals.grandTotal, 'grandTotal After Adding A Coffee',2.875),
+      isA<CartState>().having((state)=> state.totals.grandTotal, 'grandTotal After Adding A Bagel', 6.555),
+      isA<CartCheckedOutState>().having((state)=> state.receipt.totals.grandTotal, 'grandTotal After Adding A Bagel', 6.555),
+
+    ]
+  );
 }

@@ -59,3 +59,9 @@ class RedoCartEvent extends CartEvent {
   @override
   List<Object> get props => [];
 }
+
+class GenerateReceipt extends CartEvent {
+  const GenerateReceipt();
+  @override
+  List<Object> get props => [];
+}
