@@ -1,16 +1,49 @@
-# pos_task
+# Mini-POS Checkout Core
 
-A new Flutter project.
+This is a logic-only POS checkout engine built using **pure Dart** and **BLoC**. The implementation focuses on business rule modeling, event/state handling, TDD, and unit test discipline.
 
-## Getting Started
+> ✅ No UI, no plugins, no database — 100% pure Dart core logic.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 🔧 Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Product catalog loading (JSON-based)
+- Cart management: add/remove/update
+- VAT calculation
+- Total price & receipt generation
+- **Undo/Redo** last N cart actions
+- **100% unit test coverage**
+- `asMoney` extension on `num`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 📁 Project Structure
+
+mini_pos/
+├── lib/
+│   └── src/
+│       ├── cart/
+│       │   ├── bloc/
+│       │   │   ├── cart_bloc.dart
+│       │   │   ├── cart_event.dart
+│       │   │   ├── cart_state.dart
+│       │   └── models/
+│       │       ├── cart_line.dart
+                ├── receipt.dart
+│       │       ├── totals.dart
+│       ├── catalog/
+│       │   ├── bloc/
+│       │   │   ├── catalog_bloc.dart
+│       │   │   ├── catalog_event.dart
+│       │   │   ├── catalog_state.dart
+│       │   └── models/
+│       │       └── catalog_item.dart
+│       ├── extensions/
+│       │   └── money_extension.dart
+├── test/
+│   ├── cart_bloc_test.dart
+│   ├── catalog_bloc_test.dart
+├── pubspec.yaml
+├── analysis_options.yaml
+└── README.md
